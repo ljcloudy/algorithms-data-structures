@@ -6,6 +6,7 @@ package com.cloudy.sort;
 public class MergerSort extends SortBase {
 
     public MergerSort() {
+        this.name = "mergerSort";
     }
 
     public MergerSort(String name) {
