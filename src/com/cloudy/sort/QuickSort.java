@@ -53,6 +53,7 @@ public class QuickSort extends SortBase {
 
     /**
      * 返回p 使得 array[l,p-1] < array[p]  array[p+1,r] > array[p]
+     *
      * @param array
      * @param l
      * @param r
@@ -83,16 +84,22 @@ public class QuickSort extends SortBase {
         return j;
     }
 
+
+
+
     public static void main(String[] args) {
         QuickSort quickSort = new QuickSort();
 
         MergerSort mergerSort = new MergerSort();
 
-//        int[] array = generateRandomArr(10, 1, 10);
-        int[] array = generateNearlyOrderedArray(10000000, 100);
-        int[] array2 = generateNearlyOrderedArray(10000000, 100);
+        int[] array = generateRandomArr(100000, 1, 10);
+        int[] array2 = generateRandomArr(100000, 1, 10);
+//        int[] array = generateNearlyOrderedArray(10000000, 100);
+//        int[] array2 = generateNearlyOrderedArray(10000000, 100);
 //        int[] array2 = generateRandomArr(1000000, 1, 100000);
-        mergerSort.testSort(array2);
+//        mergerSort.testSort(array2);
+//        quickSort.testSort(array);
+
         quickSort.testSort(array);
 
 
