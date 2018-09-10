@@ -67,6 +67,8 @@ public class QuickSort extends SortBase {
 
         int i = l + 1, j = r;
         while (true) {
+            //注意：先比较数组小标，在比较数组中元素大小
+            //防止数组下表越界
             while (i <= r && array[i] < v) {
                 i++;
             }
@@ -92,7 +94,7 @@ public class QuickSort extends SortBase {
 
         MergerSort mergerSort = new MergerSort();
 
-        int[] array = generateRandomArr(100000, 1, 10);
+        int[] array = generateRandomArr(10, 1, 10);
         int[] array2 = generateRandomArr(100000, 1, 10);
 //        int[] array = generateNearlyOrderedArray(10000000, 100);
 //        int[] array2 = generateNearlyOrderedArray(10000000, 100);

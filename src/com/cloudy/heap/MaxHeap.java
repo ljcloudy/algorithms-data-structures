@@ -1,5 +1,7 @@
 package com.cloudy.heap;
 
+import java.util.Arrays;
+
 /**
  * created by lijianyun on 2018/8/30
  */
@@ -19,16 +21,17 @@ public class MaxHeap<T> {
      * 将一个数组初始化为最大堆
      * 将n个元素逐个插入到一个空堆中，算法时间复杂度为O(nlogn)
      * heapify的过程，算法复杂度为O(n)
+     *
      * @param array
      */
     public MaxHeap(int[] array) {
         data = new int[array.length + 1];
         capacity = array.length;
         for (int i = 0; i < array.length; i++) {
-            data[i+1] = array[i];
+            data[i + 1] = array[i];
         }
         count = array.length;
-        for (int i = count/2; i >=1; i--) {
+        for (int i = count / 2; i >= 1; i--) {
             shiftDown(i);
         }
 
@@ -53,6 +56,10 @@ public class MaxHeap<T> {
         count--;
         this.shiftDown(1);
         return ret;
+    }
+
+    public int max() {
+        return data[1];
     }
 
     /**
@@ -94,5 +101,24 @@ public class MaxHeap<T> {
 
     public boolean isEmpty() {
         return count == 0;
+    }
+
+    public static void main(String[] args) {
+        MaxHeap heap = new MaxHeap(11);
+
+        int[] array = {94, 10, 6, 2, 20, 1, 8, 67, 90, 100, 3, 5, 63};
+        System.out.println(Arrays.toString(array));
+
+        for (int i = 0; i < array.length; i++) {
+            if (i < 11) {
+                heap.insert(array[i]);
+            } else {
+                heap.extracMax();
+                heap.insert(array[i]);
+            }
+        }
+
+        System.out.println(Arrays.toString(heap.data));
+
     }
 }
