@@ -1,15 +1,22 @@
 package com.cloudy.graph;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * created by lijianyun on 2018/9/17
  */
 public class Main {
     public static void main(String[] args) {
         String filename = "testG1.txt";
-        SparseGraph g1 = new SparseGraph(13, false);
+        SparseGraph g1 = new SparseGraph(14, false);
         ReadGraph rg1 = new ReadGraph(g1, filename);
         System.out.println("test G1 Sparse Graph:");
         g1.show();
+
+        Components c1 = new Components(g1);
+        int count = c1.count();
+        System.out.println("count : " + count);
 
 
         System.out.println();
@@ -18,5 +25,6 @@ public class Main {
         ReadGraph rg2 = new ReadGraph(g2, filename);
         System.out.println("test G1 in Dense Graph:");
         g2.show();
+
     }
 }
