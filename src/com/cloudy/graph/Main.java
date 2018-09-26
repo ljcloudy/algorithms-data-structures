@@ -18,6 +18,11 @@ public class Main {
         int count = c1.count();
         System.out.println("count : " + count);
 
+        Path path = new Path(g1,0);
+        path.showPath(5);
+        ShortestPath shortestPath = new ShortestPath(g1,0);
+        shortestPath.showPath(6);
+
 
         System.out.println();
 

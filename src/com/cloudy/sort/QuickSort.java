@@ -61,8 +61,8 @@ public class QuickSort extends SortBase {
      */
     private int partition2(int[] array, int l, int r) {
         //优化：随机选择一个基准点
-        swap(array, l, (int) (Math.random() * (r - l + 1)) + l);
-
+//        swap(array, l, (int) (Math.random() * (r - l + 1)) + l);
+        print(array);
         int v = array[l];
 
         int i = l + 1, j = r;
@@ -86,23 +86,32 @@ public class QuickSort extends SortBase {
         return j;
     }
 
-
+    public void sortByLoop(int[] array, int l, int r) {
+        int v = array[l];
+        int vIndex = l;
+        while (l < r) {
+            while (l < r && array[l] < v) {
+                ++l;
+            }
+            while (l < r && array[l] > v) {
+                --r;
+            }
+            if (array[l] != array[r]) {
+                swap(array, l, r);
+            }
+        }
+        swap(array, l, vIndex);
+    }
 
 
     public static void main(String[] args) {
         QuickSort quickSort = new QuickSort();
 
-        MergerSort mergerSort = new MergerSort();
+        int[] array = QuickSort.generateRandomArr(10, 1, 100);
 
-        int[] array = generateRandomArr(10, 1, 10);
-        int[] array2 = generateRandomArr(100000, 1, 10);
-//        int[] array = generateNearlyOrderedArray(10000000, 100);
-//        int[] array2 = generateNearlyOrderedArray(10000000, 100);
-//        int[] array2 = generateRandomArr(1000000, 1, 100000);
-//        mergerSort.testSort(array2);
-//        quickSort.testSort(array);
-
-        quickSort.testSort(array);
+        print(array);
+        quickSort.sort(array);
+        print(array);
 
 
     }

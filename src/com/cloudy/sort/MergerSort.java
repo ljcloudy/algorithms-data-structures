@@ -3,7 +3,7 @@ package com.cloudy.sort;
 /**
  * created by lijianyun on 2018/8/23
  */
-public class MergerSort extends SortBase {
+public class  MergerSort extends SortBase {
 
     public MergerSort() {
         this.name = "mergerSort";
