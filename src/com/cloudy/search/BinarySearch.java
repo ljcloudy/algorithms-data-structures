@@ -17,7 +17,7 @@ public class BinarySearch {
     public static int find(int[] array, int target) {
         //在array[l,r]之间查找target
         int l = 0, r = array.length - 1;
-        while (l <= r) {//查找元素在收尾需要=
+        while (l <= r) {//查找元素在首尾需要=
             //防止溢出
             int mid = l + (r - l + 1) / 2;
             if (array[mid] == target) {
@@ -99,6 +99,27 @@ public class BinarySearch {
         return r;
     }
 
+    /**
+     * 返回比target小的元素个数
+     * @param array
+     * @param target
+     * @return
+     */
+    public static int rank(int[] array, int target) {
+        int l = 0, r = array.length - 1;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            if (array[mid] == target) {
+                return mid;
+            } else if (array[mid] > target) {
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return l;
+    }
+
     public static void main(String[] args) {
 //        int[] array = SortBase.generateRandomArr(10, 1, 100);
         int[] array = {10, 2, 90, 13, 29, 90, 30, 50, 190, 91};
@@ -109,7 +130,6 @@ public class BinarySearch {
 
         System.out.println(i + ":" + array[i]);
         System.out.println(ceil + ":" + array[ceil]);
-
 
 
     }

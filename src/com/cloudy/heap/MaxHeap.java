@@ -20,7 +20,7 @@ public class MaxHeap<T> {
     /**
      * 将一个数组初始化为最大堆
      * 将n个元素逐个插入到一个空堆中，算法时间复杂度为O(nlogn)
-     * heapify的过程，算法复杂度为O(n)
+     * Heapify的过程，算法复杂度为O(n)
      *
      * @param array
      */

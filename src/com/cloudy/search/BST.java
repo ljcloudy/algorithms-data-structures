@@ -82,6 +82,9 @@ public class BST<Key extends Comparable<Key>, Value> {
         inOrder(root);
     }
 
+    /**
+     * 后续遍历
+     */
     public void postOrder() {
         postOrder(root);
     }
@@ -103,6 +106,35 @@ public class BST<Key extends Comparable<Key>, Value> {
                 q.add(node.right);
             }
         }
+    }
+
+    public Key floor(Key key) {
+        Node x = floor(root, key);
+        if (x == null)
+            return null;
+        return x.key;
+    }
+
+    /**
+     * 查找小于等于key 的节点
+     *
+     * @param node
+     * @param key
+     * @return
+     */
+    private Node floor(Node node, Key key) {
+        if (node == null)
+            return null;
+        int cmp = key.compareTo(node.key);
+        if (cmp == 0)
+            return node;
+        if (cmp < 0)
+            return floor(node.left, key);
+        Node n = floor(node.right, key);
+        if (n != null)
+            return n;
+        else
+            return node;
     }
 
     /**
@@ -147,6 +179,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 
     /**
      * 删除键值为key的节点
+     *
      * @param key
      */
     public void remove(Key key) {
@@ -323,6 +356,8 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
         // 注意, 由于随机生成的数据有重复, 所以bst中的数据数量大概率是小于n的
 
+        System.out.println("Test floor :"+bst.floor(80));
+
         // 测试 removeMin
         // 输出的元素应该是从小到大排列的
         System.out.println("Test removeMin: ");
@@ -350,7 +385,6 @@ public class BST<Key extends Comparable<Key>, Value> {
             System.out.println("After removeMax, size = " + bst.size());
         }
 
-        System.out.println(Integer.MAX_VALUE);
     }
 
 }

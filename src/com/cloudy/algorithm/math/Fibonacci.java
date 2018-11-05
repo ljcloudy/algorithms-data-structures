@@ -1,4 +1,4 @@
-package com.cloudy.algorithm;
+package com.cloudy.algorithm.math;
 
 /**
  * 斐波那契数列解法：
