@@ -17,10 +17,12 @@ public class MoveZeroes {
 
     public static void moveZeroes(int[] nums) {
         int p = 0;
+        //定义数组区间[0,p]不存在0元素，维护这个定义
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 0) {
                 if (p != i) {
                     swap(nums, i, p);
+//                    nums[p] = nums[i];
                 }
                 p++;
             }
