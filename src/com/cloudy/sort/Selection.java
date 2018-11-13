@@ -8,6 +8,7 @@ package com.cloudy.sort;
 public class Selection {
 
     public static int solve2(int[] array, int k){
+        k = array.length - k + 1;
         return solve(array,0,array.length-1, k-1);
     }
 
@@ -63,9 +64,10 @@ public class Selection {
     }
 
     public static void main(String[] args) {
-        int[] array = {0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+//        int[] array = {0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] array = {3,2,1,5,6,4};
 
-        int solve = Selection.solve2(array, 1);
+        int solve = Selection.solve2(array, 2);
         System.out.println(solve);
     }
 

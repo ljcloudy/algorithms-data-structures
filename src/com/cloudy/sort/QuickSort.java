@@ -111,7 +111,10 @@ public class QuickSort extends SortBase {
 
         print(array);
         quickSort.sort(array);
+//        quickSort.sortByLoop(array,0,array.length-1);
         print(array);
+
+
 
 
     }
