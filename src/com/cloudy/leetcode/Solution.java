@@ -1,91 +1,112 @@
 package com.cloudy.leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 class Solution {
 
     public static void main(String[] args) {
-        int[] nums = {-1, 0, 1, 2, -1, -4};
-        List<List<Integer>> lists = threeSum(nums);
+//        Point[] nums = {1, 1, 1, 0};
+//        [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
 
-        System.out.println(lists);
+        Point[] points = {
+                new Point(1, 1),
+                new Point(3, 2),
+                new Point(5, 3),
+                new Point(4, 1),
+                new Point(2, 3),
+                new Point(1, 4),
+        };
 
-        System.out.println(new HashSet<>(lists));
+        int result = maxPoints(points);
+        System.out.println(result);
+        System.out.println(-0.0 == 0.0);
 
     }
 
-    public static List<List<Integer>> twoSum(int[] nums, int target, int l, int r) {
-        Map<Integer, Integer> map = new HashMap<>();
+    public static int maxPoints(Point[] points) {
+        if (points.length <= 1)
+            return points.length;
+        int result = 1;
+        for (int i = 0; i < points.length; i++) {
+            Map<String, Integer> map = new HashMap();
+            int samePoint = 0;
 
-        List<List<Integer>> result = new ArrayList<>();
-
-        for (int i = l; i < r; i++) {
-            int value = target - nums[i];
-            if (map.containsKey(value)) {
-                result.add(Arrays.asList(value, nums[i]));
-            }
-            map.put(nums[i], i);
-        }
-
-        return result;
-    }
-
-    public static List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        Arrays.sort(nums);
-        Set<List<Integer>> set = new HashSet<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > 0) break;
-            if (i > 0 && nums[i] == nums[i - 1])
-                continue;
-            List<List<Integer>> list = twoSum(nums, -nums[i], i + 1, nums.length);
-            if (!list.isEmpty()) {
-                for (List<Integer> integerList : list) {
-
-                    List<Integer> asList = Arrays.asList(nums[i], integerList.get(0), integerList.get(1));
-//                    Collections.sort(asList);
-                    if (!set.contains(asList)) {
-                        result.add(asList);
-                        set.add(asList);
-                    }
+            for (int j = 0; j < points.length; j++) {
+                if (points[i].x == points[j].x && points[i].y == points[j].y) {
+                    samePoint++;
+                } else {
+                    map.put(getPointStr(slope(points[j], points[i])), map.getOrDefault(getPointStr(slope(points[j], points[i])), 0) + 1);
                 }
             }
+            result = Math.max(result,samePoint);
+            for (Integer count : map.values()) {
+                result = Math.max(result,count+samePoint);
+            }
         }
 
         return result;
     }
 
-    public static List<List<Integer>> threeSum2(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        Arrays.sort(nums);
+    public static Point slope(Point a, Point b) {
 
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > 0) break;
-            if (i > 0 && nums[i] == nums[i - 1]) continue;
-            int target = 0 - nums[i];
-            int l = i + 1, r = nums.length - 1;
-            while (l < r) {
-                if (nums[l] + nums[r] == target) {
-                    result.add(Arrays.asList(i, l, r));
-                    while (l < r && nums[l] == nums[l + 1])
-                        ++l;
-                    while (l < r && nums[r] == nums[r + 1])
-                        --r;
-                    ++l;
-                    --r;
-                } else if (nums[l] + nums[r] < target)
-                    l++;
-                else
-                    r--;
-            }
+        int dx = a.x - b.x;
+        int dy = a.y - b.y;
+        if (dx == 0) {
+            return new Point(1, 0);
         }
-        return result;
+        if (dy == 0) {
+            return new Point(0, 1);
+        }
+        int g = gcd(Math.abs(dy), Math.abs(dx));
+        dy /= g;
+        dx /= g;
+        if (dx < 0) {
+            dy = -dy;
+            dx = -dx;
+        }
+
+        return (new Point(dy, dx));
+    }
+
+    private static int gcd(int a, int b) {
+
+        if (a < b) {
+            int tmp = a;
+            a = b;
+            b = tmp;
+        }
+        if (a % b == 0) {
+            return b;
+        }
+        return gcd(b, a % b);
+    }
+
+    private static String getPointStr(Point point) {
+        return point.x + "/" + point.y;
+    }
+
+    static class Point {
+        int x;
+        int y;
+
+        Point() {
+            x = 0;
+            y = 0;
+        }
+
+        Point(int a, int b) {
+            x = a;
+            y = b;
+        }
+
+        @Override
+        public String toString() {
+            return "Point{" +
+                    "x=" + x +
+                    ", y=" + y +
+                    '}';
+        }
     }
 
 
